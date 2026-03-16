@@ -25,13 +25,33 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+**Game Purpose:**
+
+This is a number guessing game where the player tries to guess a randomly generated secret number within a limited number of attempts. The game gives hints after each guess to tell you whether to guess higher or lower, and awards points based on how quickly you find the answer.
+
+**Bugs Found:**
+
+- The hints were backwards: guessing too high told you to go higher instead of lower
+- The secret number type was being switched to a string on every even attempt, making correct
+  guesses fail silently
+- The Hard difficulty range (1–50) was actually easier than Normal (1–100)
+- The info bar always showed "1 and 100" regardless of which difficulty was selected
+- The attempts counter started at 1 instead of 0, giving one fewer attempt on the first game
+- All four logic functions in logic_utils.py raised NotImplementedError and were never implemented
+
+**Fixes Applied:**
+
+- Moved all game logic (check_guess, parse_guess, get_range_for_difficulty, update_score)
+  into logic_utils.py and imported them into app.py
+- Fixed check_guess to return the correct hint direction ("Go LOWER!" when guess is too high)
+- Removed the type-switching block that was converting the secret to a string on even attempts
+- Fixed Hard difficulty range to 1–500 so it is actually harder than Normal
+- Updated the info bar to use the dynamic {low} and {high} values from get_range_for_difficulty
+- Fixed attempts initialization from 1 to 0
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+![Winning game screenshot](image.png)
 
 ## 🚀 Stretch Features
 
